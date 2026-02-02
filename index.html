@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Surprise 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", cursive;
+      background: radial-gradient(circle, #ffb6c1, #ff4d88);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.7rem;
+      color: white;
+      text-shadow: 0 0 10px #ff0066;
+      margin-bottom: 30px;
+      animation: pop 1s infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    .buttons {
+      position: relative;
+      width: 350px;
+      height: 180px;
+    }
+
+    button {
+      padding: 15px 28px;
+      font-size: 20px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    #yesBtn {
+      background: #00e676;
+      color: white;
+      left: 60px;
+      top: 70px;
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #333;
+      color: white;
+      left: 200px;
+      top: 70px;
+      box-shadow: 0 0 15px black;
+    }
+
+    #message {
+      margin-top: 40px;
+      font-size: 2.4rem;
+      color: #d1005d;
+      display: none;
+      font-weight: 900;
+      text-shadow: 0 0 12px #ff4da6;
+      animation: glow 1s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+
+    .fall {
+      position: absolute;
+      font-size: 30px;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .bg-heart {
+      position: absolute;
+      font-size: 18px;
+      opacity: 0.4;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-20vh); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Will you be my Valentine 😚💘</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💞</button>
+    <button id="noBtn">No 🙄</button>
+  </div>
+
+  <div id="message">
+    I love you meri motki gadhediiii bubu 😚❤️
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+
+    function moveNoButton() {
+      let x = Math.random() * 280;
+      let y = Math.random() * 140;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      message.style.display = "block";
+
+      // ✅ Hide buttons after Yes
+      document.querySelector(".buttons").style.display = "none";
+
+      // Emoji rain 🌹❤️💞
+      setInterval(() => {
+        const emoji = document.createElement("div");
+        emoji.classList.add("fall");
+
+        const emojis = ["❤️", "🌹", "💞", "💘", "😘"];
+        emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+        emoji.style.left = Math.random() * window.innerWidth + "px";
+        emoji.style.top = "-20px";
+
+        document.body.appendChild(emoji);
+
+        setTimeout(() => emoji.remove(), 3000);
+      }, 150);
+    });
+
+    // Floating hearts background
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("bg-heart");
+      heart.innerHTML = "💗";
+
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }, 400);
+  </script>
+
+</body>
+</html>
